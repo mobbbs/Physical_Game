@@ -5,5 +5,35 @@
       "width": 2340,
       "height": 1080
     }
+  },
+  "layer": [
+    {
+      "name": "gird",
+      "value": 1024
+    },
+    {
+      "name": "map",
+      "value": 2048
+    }
+  ],
+  "sorting-layer": {
+    "layers": [
+      {
+        "id": 0,
+        "name": "default",
+        "value": 0
+      },
+      {
+        "id": 1,
+        "name": "map",
+        "value": 1
+      },
+      {
+        "id": 2,
+        "name": "grid",
+        "value": 2
+      }
+    ],
+    "increaseId": 2
   }
 }
