@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "9ba6e7eb-6ec6-47de-ad95-487c580af1ff",
+  "uuid": "6f0d5885-01da-4ff2-a0f6-a66987badbee",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Straight wire"
+    "syncNodeName": "grid"
   }
 }

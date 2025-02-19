@@ -7,7 +7,7 @@ export class InputManager extends Component {
     currentPosition: Vec2 = new Vec2();
     lastPosition: Vec2 = new Vec2();
 
-    isTouch
+    isTouching : boolean = false;
 
     protected onEnable(): void {
         this.node.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
@@ -18,7 +18,7 @@ export class InputManager extends Component {
     private onTouchStart(event: EventTouch) {
         this.lastPosition = this.currentPosition;
         this.currentPosition = event.getUILocation();
-
+        this.isTouching = true;
     }
 
     private onTouchMove(event: EventTouch) {
@@ -29,6 +29,7 @@ export class InputManager extends Component {
     private onTouchEnd(event: EventTouch) {
         this.lastPosition = this.currentPosition;
         this.currentPosition = event.getUILocation();
+        this.isTouching = false;
     }
 
     protected onDisable(): void {

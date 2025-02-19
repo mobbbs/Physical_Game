@@ -29,10 +29,13 @@
       },
       {
         "__id__": 12
+      },
+      {
+        "__id__": 15
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 17
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -89,8 +92,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 90,
+      "y": 90,
       "z": 0
     },
     "_lrot": {
@@ -257,8 +260,8 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
+      "x": 0,
+      "y": 0
     },
     "_id": ""
   },
@@ -278,11 +281,85 @@
     "__prefab": {
       "__id__": 13
     },
+    "data": {
+      "__id__": 14
+    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "eel7ZYk0lMULSWiaqZl1YN"
+  },
+  {
+    "__type__": "ObjectData",
+    "gridSize": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "name": "Battery",
+    "id": 1,
+    "canMask": 0,
+    "prefab": {
+      "__uuid__": "487a468b-841f-4d18-9f18-3bc3a49bdf6c",
+      "__expectedType__": "cc.Prefab"
+    }
+  },
+  {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 16
+    },
+    "clickEvents": [],
+    "_interactable": true,
+    "_transition": 3,
+    "_normalColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_hoverColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "_pressedColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_normalSprite": null,
+    "_hoverSprite": null,
+    "_pressedSprite": null,
+    "_disabledSprite": null,
+    "_duration": 0.1,
+    "_zoomScale": 1.2,
+    "_target": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "36ngNslKxMj7y9tWYx/0wJ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -293,6 +370,7 @@
       "__id__": 0
     },
     "fileId": "e3NvDhXAJK8Iu/Vepf5VH6",
+    "instance": null,
     "targetOverrides": null
   }
 ]
