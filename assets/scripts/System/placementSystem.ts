@@ -24,7 +24,7 @@ export class placementSystem extends Component {
 
     @property(Node)
     selectIndecate : Node = null;
-
+ b 
     @property(Grid)
     grid: Grid = null;
 
@@ -34,6 +34,10 @@ export class placementSystem extends Component {
     // onPlaceing : boolean = true;
 
     placeObjectControllerList : ObjectController[] = [];
+
+    dx : number[] = [0, 0, 0, 1, -1];
+    dy : number[] = [0, 1, -1, 0, 0];
+
 
     currentPlacenum : number = 0;
 
@@ -55,6 +59,7 @@ export class placementSystem extends Component {
         this.placeObject.setParent(this.placeObjectParent);
         this.placeObjectController = this.placeObject.getComponent(ObjectController);
         this.placeObjectController.button.enabled = false;
+        this.placeObjectController.grid = this.grid;
         this.placeObject.getComponent(UITransform).setContentSize(size(this.grid.cellSize.x * this.placeObjectController.data.gridSize.x, this.grid.cellSize.y * this.placeObjectController.data.gridSize.y));
         this.placeObject.setWorldPosition(pos);
         this.placeObjectController.onMap = true;
@@ -68,9 +73,19 @@ export class placementSystem extends Component {
             return;
         }
         let temp = this.placeObjectControllerList[this.placeObjectControllerList.length - 1]; // 可用对象池
-        this.placeObjectControllerList.pop();
         this.grid.RefreeArea(temp.gridPos.x, temp.gridPos.y, temp.data.gridSize.x, temp.data.gridSize.y);
-        temp.node.destroy();
+        
+        for (let i = 0; i < 5; i++){
+            let u = temp.gridPos.x + this.dx[i];
+            let v = temp.gridPos.y + this.dy[i];
+            console.log(this.grid.getGridController(u, v));
+            this.grid.getGridController(u, v)?.buildNeighbour();
+            this.grid.getGridController(u, v)?.checkType();
+            this.grid.getGridController(u, v)?.freshState();
+        }
+        this.placeObjectControllerList.pop();
+
+        // temp.node.destroy();
     }
 
     protected update(dt: number): void {
@@ -79,7 +94,6 @@ export class placementSystem extends Component {
         
         // 强制grid位移单方向
         if (this.inputManager.isTouching){
-            console.log(this.LastgridPos)
             if (this.LastgridPos.x > this.inf / 2){
                 this.LastgridPos = gridPos.clone();
             }else{
@@ -97,16 +111,19 @@ export class placementSystem extends Component {
         }
         this.selectIndecate.setWorldPosition(this.grid.getCelltoWorldPosition(gridPos));
         if (this.inputManager.isTouching && this.placeObjectData != null){
-            if (this.grid.OccupyArea(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y)){
+            if (this.grid.isThisAreaOccupy(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y)){
                 this.createPlaceObject(this.selectIndecate.worldPosition, new Vec2(gridPos.x, gridPos.y));
+                this.grid.OccupyArea(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y,this.placeObjectController);
+                // console.log(this.grid.getGridController(this.placeObjectController.gridPos.x, this.placeObjectController.gridPos.y));
                 this.currentPlacenum++;
-                if (this.currentPlacenum > 1){
-                    this.placeObjectControllerList[this.placeObjectControllerList.length - 1].setPreNode(this.placeObjectControllerList[this.placeObjectControllerList.length - 2]);
-                    this.placeObjectControllerList[this.placeObjectControllerList.length - 1].checkType();
-                    this.placeObjectControllerList[this.placeObjectControllerList.length - 2].setNextNode(this.placeObjectControllerList[this.placeObjectControllerList.length - 1]);
-                    this.placeObjectControllerList[this.placeObjectControllerList.length - 2].checkType();
+                for (let i = 0; i < 5; i++){
+                    let u = this.placeObjectController.gridPos.x + this.dx[i];
+                    let v = this.placeObjectController.gridPos.y + this.dy[i];
+                    this.grid.getGridController(u, v)?.buildNeighbour();
+                    this.grid.getGridController(u, v)?.checkType();
+                    (this.grid.getGridController(u, v))?.freshState();
                 }
-            }
+            }  
         }else if (this.currentPlacenum > 0){
             console.log(this.placeObjectControllerList.length);
             for (let i = 0; i < this.placeObjectControllerList.length; i++){

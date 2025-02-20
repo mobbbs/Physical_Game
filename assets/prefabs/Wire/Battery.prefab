@@ -31,7 +31,7 @@
         "__id__": 12
       },
       {
-        "__id__": 15
+        "__id__": 14
       }
     ],
     "_prefab": {
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "e01fad33-a430-431b-944d-8b8bc0762329@f9941",
+      "__uuid__": "7f0acb6a-500e-4b0a-9035-967251bf034b@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -270,42 +270,6 @@
     "fileId": "6cXswmqqFOsocfO1wSpI04"
   },
   {
-    "__type__": "00c9crQwUREwq8LBMb/wSkT",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 13
-    },
-    "data": {
-      "__id__": 14
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "eel7ZYk0lMULSWiaqZl1YN"
-  },
-  {
-    "__type__": "ObjectData",
-    "gridSize": {
-      "__type__": "cc.Vec2",
-      "x": 2,
-      "y": 2
-    },
-    "name": "Battery",
-    "id": 1,
-    "canMask": 0,
-    "prefab": {
-      "__uuid__": "487a468b-841f-4d18-9f18-3bc3a49bdf6c",
-      "__expectedType__": "cc.Prefab"
-    }
-  },
-  {
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
@@ -315,7 +279,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 16
+      "__id__": 13
     },
     "clickEvents": [],
     "_interactable": true,
@@ -360,6 +324,42 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "36ngNslKxMj7y9tWYx/0wJ"
+  },
+  {
+    "__type__": "db306RIK2RLGIGZmlBb03HC",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 15
+    },
+    "data": {
+      "__id__": 16
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "05EWRsWnNAr6j6YLHUQfpB"
+  },
+  {
+    "__type__": "ObjectData",
+    "gridSize": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "name": "Battery",
+    "id": 1,
+    "canMask": 0,
+    "prefab": {
+      "__uuid__": "487a468b-841f-4d18-9f18-3bc3a49bdf6c",
+      "__expectedType__": "cc.Prefab"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

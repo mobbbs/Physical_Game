@@ -20,8 +20,14 @@ const WireType = {
         mid: 1,
         tail: 2
     },
-    corner : {
-        mid : 4
+    corner: {
+        mid: 4
+    },
+    Ttype: {
+        mid: 5
+    },
+    cross: {
+        mid: 6
     }
 }
 
@@ -36,16 +42,26 @@ export class WireController extends ObjectController {
     @property(SpriteFrame)
     straight_tail: SpriteFrame;
     @property(SpriteFrame)
-    corner_mid : SpriteFrame;
-    
+    corner_mid: SpriteFrame;
+    @property(SpriteFrame)
+    Ttype_mid: SpriteFrame;
+    @property(SpriteFrame)
+    cross_mid: SpriteFrame;
+
     spfs: Map<number, SpriteFrame> = new Map<number, SpriteFrame>;
     rotationType: RotationType = RotationType.stateFirst;
+    // 左右上下
+    WireState: number[][] = [[0, 0], [0, 1], [0, 1], [0, 1]
+    , [0, 0], [4, 0], [4, 1], [5, 1], [0, 0], [4, 3], [4, 2], [5, 3], [0, 0], [5, 0], [5, 2], [6, 0]];
+
     protected override onLoad(): void {
         super.onLoad();
         this.saveWireTypeSpf(WireType.straight.head, this.straight_head.clone());
         this.saveWireTypeSpf(WireType.straight.mid, this.straight_mid.clone());
         this.saveWireTypeSpf(WireType.straight.tail, this.straight_tail.clone());
         this.saveWireTypeSpf(WireType.corner.mid, this.corner_mid.clone());
+        this.saveWireTypeSpf(WireType.Ttype.mid, this.Ttype_mid.clone());
+        this.saveWireTypeSpf(WireType.cross.mid, this.cross_mid.clone());
     }
 
     private saveWireTypeSpf(type: any, newspf: SpriteFrame) {
@@ -64,96 +80,32 @@ export class WireController extends ObjectController {
         }
     }
 
-    override checkType(): void {
-        if (this.preController == null) {
-            if (this.nextController) {
-                let curPos = this.gridPos.clone();
-                let nextPos = this.nextController.gridPos;
-                let DiffPos = curPos.subtract(nextPos);
-                let dir = this.getDirection(DiffPos);
-                if (dir == Direction.up) {
-                    this.Type = WireType.straight.head;
-                    this.rotationType = RotationType.stateFourth;
-                } else if (dir == Direction.down) {
-                    this.Type = WireType.straight.head;
-                    this.rotationType = RotationType.stateSecond;
-                } else if (dir == Direction.left) {
-                    this.Type = WireType.straight.head;
-                    this.rotationType = RotationType.stateFirst;
-                } else {
-                    this.Type = WireType.straight.head;
-                    this.rotationType = RotationType.stateThird;
-                }
-            } else {
-                this.Type = WireType.straight.head;
-                this.rotationType = RotationType.stateFirst;
-            }
-        } else if (this.nextController == null) {
-            let curPos = this.gridPos.clone();
-            let prePos = this.preController.gridPos;
-            let DiffPos = curPos.subtract(prePos);
-            let dir = this.getDirection(DiffPos);
-            if (dir == Direction.up) {
-                this.Type = WireType.straight.tail;
-                this.rotationType = RotationType.stateFourth;
-            } else if (dir == Direction.down) {
-                this.Type = WireType.straight.tail;
-                this.rotationType = RotationType.stateSecond;
-            } else if (dir == Direction.left) {
-                this.Type = WireType.straight.tail;
-                this.rotationType = RotationType.stateFirst;
-            } else {
-                this.Type = WireType.straight.tail;
-                this.rotationType = RotationType.stateThird;
-            }
-        } else {
-            let curPos = this.gridPos.clone();
-            let prePos = this.preController.gridPos;
-            let DiffPospre = curPos.subtract(prePos);
-            let dirPre = this.getDirection(DiffPospre.clone());
-            let nextPos = this.nextController.gridPos;
-            curPos = this.gridPos.clone();
-            let DiffPosnext = curPos.subtract(nextPos);
-            let dirNext = this.getDirection(DiffPosnext.clone());
 
-            if (this.checkDirEqualNoOrder(dirPre, dirNext, Direction.down, Direction.right)){
-                this.Type = WireType.corner.mid;
-                this.rotationType = RotationType.stateFirst;
-            }else if(this.checkDirEqualNoOrder(dirPre, dirNext, Direction.up, Direction.right)){
-                this.Type = WireType.corner.mid;
-                this.rotationType = RotationType.stateSecond;
-            }else if(this.checkDirEqualNoOrder(dirPre, dirNext, Direction.up, Direction.left)){
-                this.Type = WireType.corner.mid;
-                this.rotationType = RotationType.stateThird;
-            }else if(this.checkDirEqualNoOrder(dirPre, dirNext, Direction.down, Direction.left)){
-                this.Type = WireType.corner.mid;
-                this.rotationType = RotationType.stateFourth;
-            }else if(this.checkDirEqualNoOrder(dirPre, dirNext, Direction.right, Direction.left)){
-                console.log("DASDSA");
-                this.Type = WireType.straight.mid;
-                this.rotationType = RotationType.stateFirst;
-            }else if(this.checkDirEqualNoOrder(dirPre, dirNext, Direction.down, Direction.up)){
-                this.Type = WireType.straight.mid;
-                this.rotationType = RotationType.stateSecond;
-            }
-        }
-        this.freshState();
+    override checkType(): void {
+        let curType = 0;
+
+        if (this.leftController) curType += 8;
+        if (this.rightController) curType += 4;
+        if (this.upController) curType += 2;
+        if (this.downController) curType += 1;
+        this.Type = this.WireState[curType][0];
+        this.rotationType = this.WireState[curType][1];
     }
 
-    freshState() {
+    override freshState() {
         this.sp.spriteFrame = this.spfs.get(this.Type);
         this.sp.node.angle = this.rotationType * 90;
     }
 
-    checkDirEqual(d1 : Direction, d2 : Direction, d3 : Direction, d4 : Direction){
-        if (d1 == d3 && d2 == d4){
+    checkDirEqual(d1: Direction, d2: Direction, d3: Direction, d4: Direction) {
+        if (d1 == d3 && d2 == d4) {
             return true;
         }
         return false;
     }
 
-    checkDirEqualNoOrder(d1 : Direction, d2 : Direction, d3 : Direction, d4 : Direction){ // 不考虑先后链接的方向判定
-        if (this.checkDirEqual(d2, d1, d3, d4) || this.checkDirEqual(d1, d2, d3, d4)){
+    checkDirEqualNoOrder(d1: Direction, d2: Direction, d3: Direction, d4: Direction) { // 不考虑先后链接的方向判定
+        if (this.checkDirEqual(d2, d1, d3, d4) || this.checkDirEqual(d1, d2, d3, d4)) {
             return true;
         }
         return false;

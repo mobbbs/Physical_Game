@@ -2,6 +2,7 @@ import { _decorator, Button, Component, instantiate, Node, Sprite, Vec2 } from '
 import { ObjectData } from './ObjectData';
 import { BUILD } from 'cc/env';
 import { placementSystem } from './System/placementSystem';
+import { Grid } from './Components/Grid';
 const { ccclass, property } = _decorator;
 
 @ccclass('ObjectController')
@@ -20,23 +21,42 @@ export class ObjectController extends Component {
 
     Type : number = 0;
 
-    // link the object
-    preController : ObjectController = null;
-    nextController : ObjectController = null;
+    grid : Grid = null;
 
-    setPreNode(Pre : ObjectController){
-        // console.log("current : " + this.node._objFlags + " pre : " + Pre.node._objFlags);
-        this.preController = Pre; 
+    // link the object
+    upController : ObjectController = null;
+    downController : ObjectController = null;
+    leftController : ObjectController = null;
+    rightController : ObjectController = null;
+
+    setUpController(up : ObjectController){
+        this.upController = up;
     }
-    
-    setNextNode(next : ObjectController){
-        // console.log("current : " + this.node._objFlags + " next : " + next.node._objFlags);
-        this.nextController = next;
+    setdownController(down : ObjectController){
+        this.downController = down
+    }
+    setleftController(left : ObjectController){
+        this.leftController = left;
+    }
+    setrigthController(right : ObjectController){
+        this.rightController = right;
+    }
+
+    buildNeighbour(){
+        console.log(this.grid);
+        this.upController = this.grid.getGridController(this.gridPos.x, this.gridPos.y + 1);
+        this.downController = this.grid.getGridController(this.gridPos.x, this.gridPos.y - 1);
+        this.leftController = this.grid.getGridController(this.gridPos.x - 1, this.gridPos.y);
+        this.rightController = this.grid.getGridController(this.gridPos.x + 1, this.gridPos.y);
     }
 
     checkType(){
-        
+
     }
+    freshState(){
+
+    }
+
 
     protected onLoad(): void {
         this.button = this.getComponent(Button);
