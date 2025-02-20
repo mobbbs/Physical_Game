@@ -318,7 +318,9 @@
     "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
-    "_target": null,
+    "_target": {
+      "__id__": 1
+    },
     "_id": ""
   },
   {
@@ -339,6 +341,22 @@
     },
     "data": {
       "__id__": 16
+    },
+    "straight_head": {
+      "__uuid__": "98e02882-fb6e-45c4-aae1-7131afdcae2e@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "straight_mid": {
+      "__uuid__": "f0ef990c-e079-4118-afc4-664bbd5f7f40@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "straight_tail": {
+      "__uuid__": "98e02882-fb6e-45c4-aae1-7131afdcae2e@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "corner_mid": {
+      "__uuid__": "555ae573-3acf-4a93-a0c9-741ae00ab447@f9941",
+      "__expectedType__": "cc.SpriteFrame"
     },
     "_id": ""
   },

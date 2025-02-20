@@ -18,17 +18,19 @@ export class ObjectController extends Component {
 
     gridPos : Vec2;
 
-    Type : any;
+    Type : number = 0;
 
-    // link the ele
+    // link the object
     preController : ObjectController = null;
     nextController : ObjectController = null;
 
     setPreNode(Pre : ObjectController){
-        this.preController = Pre;
+        // console.log("current : " + this.node._objFlags + " pre : " + Pre.node._objFlags);
+        this.preController = Pre; 
     }
-
+    
     setNextNode(next : ObjectController){
+        // console.log("current : " + this.node._objFlags + " next : " + next.node._objFlags);
         this.nextController = next;
     }
 
@@ -38,11 +40,11 @@ export class ObjectController extends Component {
 
     protected onLoad(): void {
         this.button = this.getComponent(Button);
-        this.sp = this.getComponent(Sprite);
+        this.sp = this.getComponentInChildren(Sprite);
     }
-
+    
     protected onEnable(): void {
-        this.button.node.on(Button.EventType.CLICK, this.callback, this);  
+        this.node.on(Button.EventType.CLICK, this.callback, this);  
     }
 
     callback(){
@@ -57,7 +59,21 @@ export class ObjectController extends Component {
         this.button.node.off(Button.EventType.CLICK, this.callback, this);
     }
     
-
+    V2EqualJue(v1 : Vec2, v2 : Vec2){ // V2 value check
+        if (v1.x == v2.x && v1.y == v2.y){
+            return true;
+        }
+        return false;
+    }
+    V2absEqualJue(v1 : Vec2, v2 : Vec2){ // V2 value check
+        if (Math.abs(v1.x) == Math.abs(v2.x) && Math.abs(v1.y) == Math.abs(v2.y)){
+            return true;
+        }
+        return false;
+    }
+    Vec2(x : number, y : number){
+        return new Vec2(x, y);
+    }
     
 }
 
