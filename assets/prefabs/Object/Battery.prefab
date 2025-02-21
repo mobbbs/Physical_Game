@@ -92,8 +92,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 90,
-      "y": 90,
+      "x": 45,
+      "y": 45,
       "z": 0
     },
     "_lrot": {
@@ -133,8 +133,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 180,
-      "height": 180
+      "width": 90,
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "7f0acb6a-500e-4b0a-9035-967251bf034b@f9941",
+      "__uuid__": "d72f0c99-20a7-4b49-a0a5-c9883f03d967@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -255,8 +255,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 180,
-      "height": 180
+      "width": 90,
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -350,8 +350,8 @@
     "__type__": "ObjectData",
     "gridSize": {
       "__type__": "cc.Vec2",
-      "x": 2,
-      "y": 2
+      "x": 1,
+      "y": 1
     },
     "name": "Battery",
     "id": 1,

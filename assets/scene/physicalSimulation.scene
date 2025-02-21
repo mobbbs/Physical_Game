@@ -340,7 +340,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "245c139f-792c-45bd-ba58-d1cb808d4af2@f9941",
+      "__uuid__": "81ad8820-c709-4812-9c98-d8e4fc3fb6c4@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -604,7 +604,7 @@
       "r": 255,
       "g": 255,
       "b": 255,
-      "a": 255
+      "a": 0
     }
   },
   {
@@ -1425,7 +1425,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": -8.38949999999997,
       "y": 0,
       "z": 0
     },
@@ -1515,8 +1515,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 278.894,
-      "height": 1080
+      "width": 262.11500000000007,
+      "height": -50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1540,7 +1540,7 @@
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 0,
+    "_bottom": 1130,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -1565,26 +1565,26 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_resizeMode": 0,
-    "_layoutType": 3,
+    "_resizeMode": 1,
+    "_layoutType": 2,
     "_cellSize": {
       "__type__": "cc.Size",
       "width": 40,
       "height": 40
     },
-    "_startAxis": 0,
+    "_startAxis": 1,
     "_paddingLeft": 20,
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
     "_spacingX": 0,
-    "_spacingY": 0,
+    "_spacingY": 50,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
     "_constraint": 1,
-    "_constraintNum": 2,
-    "_affectedByScale": false,
-    "_isAlign": false,
+    "_constraintNum": 1,
+    "_affectedByScale": true,
+    "_isAlign": true,
     "_id": "83anV4Yz9OF5sGMmQrT5b3"
   },
   {
@@ -1599,7 +1599,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 278.894,
+      "width": 262.11500000000007,
       "height": 1080
     },
     "_anchorPoint": {
@@ -1677,8 +1677,8 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 0,
-    "_right": 0,
+    "_left": -3.552713678800501e-15,
+    "_right": 16.778999999999932,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -2456,6 +2456,10 @@
     },
     "BatteryPrefab": {
       "__uuid__": "487a468b-841f-4d18-9f18-3bc3a49bdf6c",
+      "__expectedType__": "cc.Prefab"
+    },
+    "BuldPrefab": {
+      "__uuid__": "78e2b754-ad55-42cc-a197-8ae72db652bc",
       "__expectedType__": "cc.Prefab"
     },
     "ObjectListParent": {

@@ -15,16 +15,6 @@ export class ObjectData{
     @property({type : Prefab, visible : true, tooltip : "prefab"}) 
     prefab : Prefab;
 
-    // constructor(_gridSize : Vec2, _name : string, _id : number, _canMask : number, _prefab : Prefab){
-    //     this.gridSize = _gridSize;
-    //     this.name = _name;
-    //     this.id = _id;
-    //     this.canMask = _canMask;
-    //     this.prefab = _prefab;
-    // }
-
-
-
 }
 
 

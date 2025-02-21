@@ -1,9 +1,11 @@
 import { _decorator, Button, Component, instantiate, Node, Sprite, Vec2 } from 'cc';
 import { ObjectData } from './ObjectData';
 import { BUILD } from 'cc/env';
-import { placementSystem } from './System/placementSystem';
-import { Grid } from './Components/Grid';
+import { placementSystem } from '../System/placementSystem';
+import { Grid } from '../Components/Grid';
 const { ccclass, property } = _decorator;
+
+
 
 @ccclass('ObjectController')
 export class ObjectController extends Component {
@@ -19,9 +21,19 @@ export class ObjectController extends Component {
 
     gridPos : Vec2;
 
+    @property(Number)
     Type : number = 0;
 
     grid : Grid = null;
+
+    Onele : boolean = false;
+
+    @property(Boolean)
+    beNode : boolean = false;
+
+    rotationType: number = 0;
+
+    isDestroy : boolean = false;
 
     // link the object
     upController : ObjectController = null;
@@ -43,7 +55,6 @@ export class ObjectController extends Component {
     }
 
     buildNeighbour(){
-        console.log(this.grid);
         this.upController = this.grid.getGridController(this.gridPos.x, this.gridPos.y + 1);
         this.downController = this.grid.getGridController(this.gridPos.x, this.gridPos.y - 1);
         this.leftController = this.grid.getGridController(this.gridPos.x - 1, this.gridPos.y);
@@ -61,6 +72,7 @@ export class ObjectController extends Component {
     protected onLoad(): void {
         this.button = this.getComponent(Button);
         this.sp = this.getComponentInChildren(Sprite);
+        this.isDestroy = false;
     }
     
     protected onEnable(): void {
@@ -73,6 +85,10 @@ export class ObjectController extends Component {
     
     init(newdata : ObjectData){
         this.data = newdata;
+    }
+
+    setEle(type : boolean){
+        this.Onele = type;
     }
     
     protected onDisable(): void {
@@ -94,7 +110,9 @@ export class ObjectController extends Component {
     Vec2(x : number, y : number){
         return new Vec2(x, y);
     }
-    
+    protected onDestroy(): void {
+        this.isDestroy = true;
+    }
 }
 
 

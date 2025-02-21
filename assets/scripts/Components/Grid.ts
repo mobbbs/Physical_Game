@@ -1,7 +1,7 @@
-import { _decorator, Component, Node, UITransform, Vec2, Vec3 } from 'cc';
+import { _decorator, Component, math, Node, UITransform, Vec2, Vec3 } from 'cc';
 import { pair } from '../Datastructure/pair';
-import { ObjectData } from '../ObjectData';
-import { ObjectController } from '../ObjectController';
+import { ObjectData } from '../Object/ObjectData';
+import { ObjectController } from '../Object/ObjectController';
 const { ccclass, property } = _decorator;
 
 @ccclass('Grid')
@@ -18,13 +18,13 @@ export class Grid extends Component {
     width : number;
     height : number;
 
-    gridMap: Array<boolean> = null;
+    gridMap: Array<boolean> = null; 
     ControllerMap : Array<ObjectController> = null;
 
     protected onLoad(): void {
         this.originPoint = this.node.parent.getWorldPosition();
         this.width = this.node.parent.getComponent(UITransform).width / this.cellSize.x;
-        this.height = this.node.parent.getComponent(UITransform).height / this.cellSize.y;
+        this.height = this.node.parent.getComponent(UITransform).height / this.cellSize.y;  
         this.gridMap = new Array<boolean>(this.width * this.height);
         this.ControllerMap = new Array<ObjectController>(this.width * this.height);
         this.gridMap.fill(false);
@@ -45,12 +45,17 @@ export class Grid extends Component {
     }
 
     getGridMapIndex(x : number, y : number) : number{
-        return (x * this.width + y);
+        return (y * this.width + x);
+    }
+
+    getGridpos(idx : number){
+        return new Vec2(idx % this.width, Math.floor(idx / this.width));
     }
 
     setGridtype(x: number, y: number, type: boolean) {
         this.gridMap[this.getGridMapIndex(x, y)] = type;
     }
+
     setGridController(x : number, y : number, controller : ObjectController){
         this.ControllerMap[this.getGridMapIndex(x, y)] = controller;
     }

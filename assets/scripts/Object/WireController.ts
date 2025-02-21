@@ -2,18 +2,19 @@ import { _decorator, Component, math, Node, SpringJoint2D, Sprite, spriteAssembl
 import { ObjectController } from './ObjectController';
 const { ccclass, property } = _decorator;
 
-enum Direction {
-    left,
-    right,
-    up,
-    down,
-}
 enum RotationType { // 以初始状态开始旋转幅度每逆时针90度一档次 {0, 90, 180, 270}
     stateFirst,
     stateSecond,
     stateThird,
     stateFourth
 }
+enum Direction {
+    left,
+    right,
+    up,
+    down,
+}
+
 const WireType = {
     straight: {
         head: 0,
@@ -49,7 +50,6 @@ export class WireController extends ObjectController {
     cross_mid: SpriteFrame;
 
     spfs: Map<number, SpriteFrame> = new Map<number, SpriteFrame>;
-    rotationType: RotationType = RotationType.stateFirst;
     // 左右上下
     WireState: number[][] = [[0, 0], [0, 1], [0, 1], [0, 1]
     , [0, 0], [4, 0], [4, 1], [5, 1], [0, 0], [4, 3], [4, 2], [5, 3], [0, 0], [5, 0], [5, 2], [6, 0]];
@@ -80,16 +80,19 @@ export class WireController extends ObjectController {
         }
     }
 
-
     override checkType(): void {
         let curType = 0;
-
         if (this.leftController) curType += 8;
         if (this.rightController) curType += 4;
         if (this.upController) curType += 2;
         if (this.downController) curType += 1;
         this.Type = this.WireState[curType][0];
         this.rotationType = this.WireState[curType][1];
+        if (this.Type >= 4){
+            this.beNode = true;
+        }else{
+            this.beNode = false;
+        }
     }
 
     override freshState() {
@@ -110,8 +113,7 @@ export class WireController extends ObjectController {
         }
         return false;
     }
-
-
+    
 }
 
 
