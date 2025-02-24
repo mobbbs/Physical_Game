@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, director, Node } from 'cc';
 import { ObjectController } from './ObjectController';
 import { circuitSystem } from '../System/circuitSystem';
 const { ccclass, property } = _decorator;
@@ -24,6 +24,7 @@ export class BatteryController extends ObjectController {
     protected onLoad(): void {
         super.onLoad();
         this.beNode = true;
+        this.Onele = 1;
     }
 
     negativePole : Direction;
@@ -33,7 +34,9 @@ export class BatteryController extends ObjectController {
     , [0, 0], [-1, -1], [-1, -1], [-1, -1], [0, 0], [-1, -1], [-1, -1], [-1, -1], [0, 0], [-1, 0], [-1, -1], [-1, -1]];
 
     CanbuildGraph : boolean = false;
-
+    override initEle(): void {
+        this.Onele = 1;
+    }
     override checkType(): void {
         let curType = 0;
         if (this.leftController) curType += 8;
@@ -43,16 +46,20 @@ export class BatteryController extends ObjectController {
         if (this.BatteryState[curType][0] == -1){
             console.error("警告！警告！错误的电池摆放");
         }else{
-            this.rotationType = this.BatteryState[curType][1];
-            if (this.leftController && this.rightController){
-                this.CanbuildGraph = true;
-            }else if (this.upController && this.rightController){
-                this.CanbuildGraph = true;
-            }
-            if (this.CanbuildGraph){
-                this.circuit.setBattery(this);
-                this.circuit.buildGraph();
-            }
+            this.buildCircuit(curType);
+        }
+    }
+
+    private buildCircuit(curType: number) {
+        this.rotationType = this.BatteryState[curType][1];
+        if (this.leftController && this.rightController) {
+            this.CanbuildGraph = true;
+        } else if (this.upController && this.rightController) {
+            this.CanbuildGraph = true;
+        }
+        if (this.CanbuildGraph) {
+            this.circuit.setBattery(this);
+            this.circuit.buildGraph();
         }
     }
 

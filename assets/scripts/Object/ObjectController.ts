@@ -10,61 +10,65 @@ const { ccclass, property } = _decorator;
 @ccclass('ObjectController')
 export class ObjectController extends Component {
 
-    @property({type : ObjectData})
-    data : ObjectData = new ObjectData();
+    @property({ type: ObjectData })
+    data: ObjectData = new ObjectData();
 
-    button : Button = null;
+    button: Button = null;
 
-    onMap : boolean = false;
+    onMap: boolean = false;
 
-    sp : Sprite = null;
+    canCross: boolean = true;
 
-    gridPos : Vec2;
+    sp: Sprite = null;
+
+    gridPos: Vec2;
 
     @property(Number)
-    Type : number = 0;
+    Type: number = 0;
 
-    grid : Grid = null;
+    grid: Grid = null;
 
-    Onele : boolean = false;
+    Onele: number = 0;
 
     @property(Boolean)
-    beNode : boolean = false;
+    beNode: boolean = false;
 
     rotationType: number = 0;
 
-    isDestroy : boolean = false;
+    equleWire : boolean = false;
+
+    isDestroy: boolean = false;
 
     // link the object
-    upController : ObjectController = null;
-    downController : ObjectController = null;
-    leftController : ObjectController = null;
-    rightController : ObjectController = null;
+    upController: ObjectController = null;
+    downController: ObjectController = null;
+    leftController: ObjectController = null;
+    rightController: ObjectController = null;
 
-    setUpController(up : ObjectController){
+    setUpController(up: ObjectController) {
         this.upController = up;
     }
-    setdownController(down : ObjectController){
+    setdownController(down: ObjectController) {
         this.downController = down
     }
-    setleftController(left : ObjectController){
+    setleftController(left: ObjectController) {
         this.leftController = left;
     }
-    setrigthController(right : ObjectController){
+    setrigthController(right: ObjectController) {
         this.rightController = right;
     }
 
-    buildNeighbour(){
+    buildNeighbour() {
         this.upController = this.grid.getGridController(this.gridPos.x, this.gridPos.y + 1);
         this.downController = this.grid.getGridController(this.gridPos.x, this.gridPos.y - 1);
         this.leftController = this.grid.getGridController(this.gridPos.x - 1, this.gridPos.y);
         this.rightController = this.grid.getGridController(this.gridPos.x + 1, this.gridPos.y);
     }
 
-    checkType(){
+    checkType() {
 
     }
-    freshState(){
+    freshState() {
 
     }
 
@@ -74,42 +78,55 @@ export class ObjectController extends Component {
         this.sp = this.getComponentInChildren(Sprite);
         this.isDestroy = false;
     }
-    
-    protected onEnable(): void {
-        this.node.on(Button.EventType.CLICK, this.callback, this);  
+
+    initEle() {
+
     }
 
-    callback(){
+    protected onEnable(): void {
+        this.node.on(Button.EventType.CLICK, this.callback, this);
+    }
+
+    offselect() {
+        this.button.node.off(Button.EventType.CLICK, this.callback, this);
+    }
+    onSomething() {
+
+    }
+
+    callback() {
         placementSystem.instance.setPlaceObject(this.data);
     }
-    
-    init(newdata : ObjectData){
+
+    init(newdata: ObjectData) {
         this.data = newdata;
     }
 
-    setEle(type : boolean){
+    setEle(type: number) {
         this.Onele = type;
+        this.freshState();
     }
-    
+
     protected onDisable(): void {
-        this.button.node.off(Button.EventType.CLICK, this.callback, this);
+        this.offselect();
     }
-    
-    V2EqualJue(v1 : Vec2, v2 : Vec2){ // V2 value check
-        if (v1.x == v2.x && v1.y == v2.y){
+
+    V2EqualJue(v1: Vec2, v2: Vec2) { // V2 value check
+        if (v1.x == v2.x && v1.y == v2.y) {
             return true;
         }
         return false;
     }
-    V2absEqualJue(v1 : Vec2, v2 : Vec2){ // V2 value check
-        if (Math.abs(v1.x) == Math.abs(v2.x) && Math.abs(v1.y) == Math.abs(v2.y)){
+    V2absEqualJue(v1: Vec2, v2: Vec2) { // V2 value check
+        if (Math.abs(v1.x) == Math.abs(v2.x) && Math.abs(v1.y) == Math.abs(v2.y)) {
             return true;
         }
         return false;
     }
-    Vec2(x : number, y : number){
+    Vec2(x: number, y: number) {
         return new Vec2(x, y);
     }
+
     protected onDestroy(): void {
         this.isDestroy = true;
     }

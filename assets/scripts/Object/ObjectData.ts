@@ -12,6 +12,8 @@ export class ObjectData{
     id : number = 0;
     @property({type : CCInteger, visible : true, tooltip : "canMask"})    
     canMask : number = 0;
+    @property({type : CCInteger, visible : true, tooltip : "Resistance"})
+    resistance : number = 0;
     @property({type : Prefab, visible : true, tooltip : "prefab"}) 
     prefab : Prefab;
 

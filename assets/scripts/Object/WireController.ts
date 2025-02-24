@@ -56,6 +56,7 @@ export class WireController extends ObjectController {
 
     protected override onLoad(): void {
         super.onLoad();
+        this.equleWire = true;
         this.saveWireTypeSpf(WireType.straight.head, this.straight_head.clone());
         this.saveWireTypeSpf(WireType.straight.mid, this.straight_mid.clone());
         this.saveWireTypeSpf(WireType.straight.tail, this.straight_tail.clone());
@@ -82,19 +83,22 @@ export class WireController extends ObjectController {
 
     override checkType(): void {
         let curType = 0;
-        if (this.leftController) curType += 8;
-        if (this.rightController) curType += 4;
-        if (this.upController) curType += 2;
-        if (this.downController) curType += 1;
+        if (this.leftController && !this.leftController.isDestroy) curType += 8;
+        if (this.rightController && !this.rightController.isDestroy) curType += 4;
+        if (this.upController && !this.upController.isDestroy) curType += 2;
+        if (this.downController && !this.downController.isDestroy) curType += 1;
+        // console.log(curType);
         this.Type = this.WireState[curType][0];
         this.rotationType = this.WireState[curType][1];
-        if (this.Type >= 4){
+        if (this.Type >= 5){
             this.beNode = true;
         }else{
             this.beNode = false;
         }
     }
-
+    override initEle(): void {
+        this.Onele = 0;
+    }
     override freshState() {
         this.sp.spriteFrame = this.spfs.get(this.Type);
         this.sp.node.angle = this.rotationType * 90;

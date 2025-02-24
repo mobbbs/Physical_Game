@@ -59,7 +59,8 @@ export class placementSystem extends Component {
         this.placeObject = instantiate(this.placeObjectData.prefab);
         this.placeObject.setParent(this.placeObjectParent);
         this.placeObjectController = this.placeObject.getComponent(ObjectController);
-        this.placeObjectController.button.enabled = false;
+        this.placeObjectController.offselect();
+        this.placeObjectController.onSomething();
         this.placeObjectController.grid = this.grid;
         this.placeObject.getComponent(UITransform).setContentSize(size(this.grid.cellSize.x * this.placeObjectController.data.gridSize.x, this.grid.cellSize.y * this.placeObjectController.data.gridSize.y));
         this.placeObject.setWorldPosition(pos);
@@ -75,10 +76,13 @@ export class placementSystem extends Component {
         }
         let temp = this.placeObjectControllerList[this.placeObjectControllerList.length - 1]; // 可用对象池
         this.grid.RefreeArea(temp.gridPos.x, temp.gridPos.y, temp.data.gridSize.x, temp.data.gridSize.y);
-
+        this.placeObjectControllerList.pop();
+        temp.isDestroy = true;
+        let x = temp.gridPos.x;
+        let y = temp.gridPos.y;
         for (let i = 1; i < 5; i++) {
-            let u = temp.gridPos.x + this.dx[i];
-            let v = temp.gridPos.y + this.dy[i];
+            let u = x + this.dx[i];
+            let v = y + this.dy[i];
             if (this.grid.getGridController(u, v) == null || this.grid.getGridController(u, v).isDestroy){
                 continue;
             }
@@ -86,7 +90,6 @@ export class placementSystem extends Component {
             this.grid.getGridController(u, v)?.checkType();
             this.grid.getGridController(u, v)?.freshState();
         }
-        this.placeObjectControllerList.pop();
         temp.grid = null;
         temp.node.destroy();
     }
@@ -117,7 +120,6 @@ export class placementSystem extends Component {
             if (this.grid.isThisAreaOccupy(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y)) {
                 this.createPlaceObject(this.selectIndecate.worldPosition, new Vec2(gridPos.x, gridPos.y));
                 this.grid.OccupyArea(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y, this.placeObjectController);
-                // console.log(this.grid.getGridController(this.placeObjectController.gridPos.x, this.placeObjectController.gridPos.y));
                 this.currentPlacenum++;
 
                 let z = -1;
@@ -136,7 +138,6 @@ export class placementSystem extends Component {
                     }
                 }
                 if (z >= 0){
-                    // console.log("SBSB");
                     let u = this.placeObjectController.gridPos.x + this.dx[z];
                     let v = this.placeObjectController.gridPos.y + this.dy[z];
                     if (this.grid.getGridController(u, v) == null || this.grid.getGridController(u, v).isDestroy){
@@ -150,7 +151,7 @@ export class placementSystem extends Component {
         } else if (this.currentPlacenum > 0) {
             // console.log(this.placeObjectControllerList.length);
             // for (let i = 0; i < this.placeObjectControllerList.length; i++) {
-            //     console.log(this.placeObjectControllerList[i].beNode);
+            //     console.log(this.placeObjectControllerList[i]);
             // }
             this.currentPlacenum = 0;
         }

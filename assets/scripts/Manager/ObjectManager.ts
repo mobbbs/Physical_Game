@@ -13,6 +13,8 @@ export class ObjectManager extends Component {
     BatteryPrefab : Prefab;
     @property(Prefab)
     BuldPrefab : Prefab
+    @property(Prefab)
+    SwitchPrefab : Prefab;
 
     @property(Node)
     ObjectListParent : Node;
@@ -24,9 +26,11 @@ export class ObjectManager extends Component {
         let straightWire = instantiate(this.straightWirePrefab);
         let Battery = instantiate(this.BatteryPrefab);
         let Buld = instantiate(this.BuldPrefab);
+        let SwitchPrefab = instantiate(this.SwitchPrefab);
         straightWire.setParent(this.ObjectListParent);
         Battery.setParent(this.ObjectListParent);
         Buld.setParent(this.ObjectListParent);
+        SwitchPrefab.setParent(this.ObjectListParent);
     }
     
 

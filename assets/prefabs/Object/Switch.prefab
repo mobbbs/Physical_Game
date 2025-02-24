@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "Wire",
+    "_name": "Switch",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Wire",
+    "_name": "Switch",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -31,7 +31,7 @@
         "__id__": 12
       },
       {
-        "__id__": 14
+        "__id__": 15
       }
     ],
     "_prefab": {
@@ -39,8 +39,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -1120,
-      "y": -490,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -145,7 +145,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "1edmMwKndGb7gK/6CoVlp/"
+    "fileId": "f6T0gsCsFI8JEYtMJWtZew"
   },
   {
     "__type__": "cc.Sprite",
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "3ed597cf-4f85-4d8d-996f-a3d0d59d696f@f9941",
+      "__uuid__": "66057b7f-ae0a-4c35-8e5a-aedef25811e4@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -190,7 +190,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "75T0YiBTxII5M1hVY08mv4"
+    "fileId": "e9cWL+SWRIWqlBVswLixIh"
   },
   {
     "__type__": "cc.Widget",
@@ -218,15 +218,15 @@
     "_isAbsBottom": true,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
-    "_originalWidth": 100,
-    "_originalHeight": 100,
+    "_originalWidth": 90,
+    "_originalHeight": 90,
     "_alignMode": 1,
     "_lockFlags": 45,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "2cSRJFYStKhrqazvqGGmWK"
+    "fileId": "7faiJXyB1KyYrp54D5eP3o"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -236,7 +236,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "cfyf+IDWhCurawBR6DxQVJ",
+    "fileId": "581SulOJ9OlKTIWnmk6jJI",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -267,7 +267,56 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "2dezrWD4ZAcKdRegFBKQJz"
+    "fileId": "5fH8xh0pZFrY9JqNp9/iNW"
+  },
+  {
+    "__type__": "91e96/KcfhG66afIRIucfRh",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 13
+    },
+    "data": {
+      "__id__": 14
+    },
+    "Type": 0,
+    "beNode": false,
+    "sps": [
+      {
+        "__uuid__": "66057b7f-ae0a-4c35-8e5a-aedef25811e4@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "3bf6df92-bda9-4c3e-a0ac-be1fb012aa95@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "77n3m2FtVAZaSsCmKUoavW"
+  },
+  {
+    "__type__": "ObjectData",
+    "gridSize": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 1
+    },
+    "name": "switch",
+    "id": 3,
+    "canMask": 0,
+    "resistance": 0,
+    "prefab": {
+      "__uuid__": "30204358-ed29-493e-b60e-3f315dc931a3",
+      "__expectedType__": "cc.Prefab"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -279,7 +328,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 13
+      "__id__": 16
     },
     "clickEvents": [],
     "_interactable": true,
@@ -318,77 +367,12 @@
     "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
-    "_target": {
-      "__id__": 1
-    },
+    "_target": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "405EMdluBGDKf/f13UiFO+"
-  },
-  {
-    "__type__": "171f5Rso/dLwo+IJZYV/p3M",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 15
-    },
-    "data": {
-      "__id__": 16
-    },
-    "Type": 0,
-    "beNode": false,
-    "straight_head": {
-      "__uuid__": "3ed597cf-4f85-4d8d-996f-a3d0d59d696f@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "straight_mid": {
-      "__uuid__": "3ed597cf-4f85-4d8d-996f-a3d0d59d696f@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "straight_tail": {
-      "__uuid__": "3ed597cf-4f85-4d8d-996f-a3d0d59d696f@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "corner_mid": {
-      "__uuid__": "47aa5bfb-8ca3-4964-9d6e-0c219effb07a@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "Ttype_mid": {
-      "__uuid__": "c1f27533-95a8-450d-942f-491c85a14a47@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "cross_mid": {
-      "__uuid__": "040ea3b4-e7bb-4eb4-a558-1cffdd76ba77@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "f2Gld7F4NDto0Dlfn2dipv"
-  },
-  {
-    "__type__": "ObjectData",
-    "gridSize": {
-      "__type__": "cc.Vec2",
-      "x": 1,
-      "y": 1
-    },
-    "name": "wire",
-    "id": 0,
-    "canMask": 1,
-    "resistance": 0,
-    "prefab": {
-      "__uuid__": "9ba6e7eb-6ec6-47de-ad95-487c580af1ff",
-      "__expectedType__": "cc.Prefab"
-    }
+    "fileId": "93gr7cEwlKya2EiyqyeRcH"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -398,7 +382,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "ceLX1AkC9HD6pWhePebkP1",
+    "fileId": "802C+LjLxAYJie4JkPZwwE",
     "instance": null,
     "targetOverrides": null
   }

@@ -312,6 +312,7 @@
     "name": "Buld",
     "id": 2,
     "canMask": 0,
+    "resistance": 5,
     "prefab": {
       "__uuid__": "78e2b754-ad55-42cc-a197-8ae72db652bc",
       "__expectedType__": "cc.Prefab"

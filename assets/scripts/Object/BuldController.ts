@@ -13,8 +13,15 @@ export class BuldController extends ObjectController {
         this.beNode = true;
     }
 
+    override setEle(type: number): void {
+        super.setEle(type);
+    }
+    override initEle(): void {
+        this.Onele = 0;
+    }
     override freshState(){
-        this.sp.spriteFrame = this.sps[Number(this.Onele)];
+        super.freshState();
+        this.sp.spriteFrame = this.sps[this.Onele];
     }
 }
 
