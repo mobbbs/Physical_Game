@@ -39,10 +39,10 @@ export class BatteryController extends ObjectController {
     }
     override checkType(): void {
         let curType = 0;
-        if (this.leftController) curType += 8;
-        if (this.rightController) curType += 4;
-        if (this.upController) curType += 2;
-        if (this.downController) curType += 1;
+        if (this.leftController && !this.leftController.isDestroy) curType += 8;
+        if (this.rightController && !this.rightController.isDestroy) curType += 4;
+        if (this.upController && !this.upController.isDestroy) curType += 2;
+        if (this.downController && !this.downController.isDestroy) curType += 1;
         if (this.BatteryState[curType][0] == -1){
             console.error("警告！警告！错误的电池摆放");
         }else{
@@ -54,9 +54,10 @@ export class BatteryController extends ObjectController {
         this.rotationType = this.BatteryState[curType][1];
         if (this.leftController && this.rightController) {
             this.CanbuildGraph = true;
-        } else if (this.upController && this.rightController) {
-            this.CanbuildGraph = true;
-        }
+        } 
+        // else if (this.upController && this.downController) {
+        //     this.CanbuildGraph = true;
+        // }
         if (this.CanbuildGraph) {
             this.circuit.setBattery(this);
             this.circuit.buildGraph();
