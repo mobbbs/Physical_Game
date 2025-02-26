@@ -17,7 +17,7 @@ export class BuldController extends ObjectController {
         super.setEle(type);
     }
     override initEle(): void {
-        this.Onele = 0;
+        super.setEle(0);
     }
     override freshState(){
         super.freshState();

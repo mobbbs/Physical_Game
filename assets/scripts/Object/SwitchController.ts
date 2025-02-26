@@ -18,11 +18,11 @@ export class SwitchController extends ObjectController {
 
     protected override onLoad(): void {
         super.onLoad();
-        this.beNode = true;
+        this.beNode = false;
         this.canCross = false;
         this.equleWire = true;
     }
-
+    
     override setEle(type: number): void {
         super.setEle(type);
     }
@@ -36,6 +36,7 @@ export class SwitchController extends ObjectController {
         this.curType = !this.curType;
         
         this.equleWire = !this.equleWire;
+        this.beNode = !this.beNode;
         this.sp.spriteFrame = this.sps[Number(this.curType)];
         this.canCross = this.curType;
         if (this.batteryBelong && !this.batteryBelong.isDestroy){

@@ -38,6 +38,9 @@ export class BatteryController extends ObjectController {
         this.Onele = 1;
     }
     override checkType(): void {
+        if (this.isDestroy){
+            return;
+        }
         let curType = 0;
         if (this.leftController) curType += 8;
         if (this.rightController) curType += 4;
@@ -51,12 +54,19 @@ export class BatteryController extends ObjectController {
     }
 
     private buildCircuit(curType: number) {
+        if (this.isDestroy){
+            return;
+        }
         this.rotationType = this.BatteryState[curType][1];
         if (this.leftController && this.rightController) {
             this.CanbuildGraph = true;
+<<<<<<< Updated upstream
         } else if (this.upController && this.rightController) {
             this.CanbuildGraph = true;
         }
+=======
+        } 
+>>>>>>> Stashed changes
         if (this.CanbuildGraph) {
             this.circuit.setBattery(this);
             this.circuit.buildGraph();
