@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab, size, UITransform, v3, Vec2, Vec3, Widget } from 'cc';
+import { _decorator, Component, director, instantiate, Node, Prefab, size, UITransform, v3, Vec2, Vec3, Widget } from 'cc';
 import { InputManager } from '../Manager/InputManager';
 import { Grid } from '../Components/Grid';
 import { ObjectController } from '../Object/ObjectController';
@@ -40,6 +40,8 @@ export class placementSystem extends Component {
     dy: number[] = [0, 1, -1, 0, 0];
 
 
+    opType : number = 0;
+
     currentPlacenum: number = 0;
 
     inf: number = 99999999;
@@ -52,6 +54,8 @@ export class placementSystem extends Component {
 
     setPlaceObject(data: ObjectData) {
         this.placeObjectData = data;
+        this.opType = 0;
+        director.getScene().emit("eraseButtonType", 0);
         this.selectIndecate.getComponent(UITransform).setContentSize(size(this.grid.cellSize.x * data.gridSize.x, this.grid.cellSize.y * data.gridSize.y));
     }
 
@@ -116,7 +120,7 @@ export class placementSystem extends Component {
             this.LastgridPos = new Vec3(this.inf, this.inf, this.inf);
         }
         this.selectIndecate.setWorldPosition(this.grid.getCelltoWorldPosition(gridPos));
-        if (this.inputManager.isTouching && this.placeObjectData != null) {
+        if (this.inputManager.isTouching && this.placeObjectData != null && this.opType == 0) {
             if (this.grid.isThisAreaOccupy(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y)) {
                 this.createPlaceObject(this.selectIndecate.worldPosition, new Vec2(gridPos.x, gridPos.y));
                 this.grid.OccupyArea(gridPos.x, gridPos.y, this.placeObjectData.gridSize.x, this.placeObjectData.gridSize.y, this.placeObjectController);
@@ -148,13 +152,50 @@ export class placementSystem extends Component {
                     }
                 }
             }
-        } else if (this.currentPlacenum > 0) {
+        }else if (this.opType == 1 && this.inputManager.isTouching){
+            if (this.grid.isGridOccupy(gridPos.x, gridPos.y)) {
+                for (let i = 0; i < this.placeObjectControllerList.length; i++){
+                    if ((this.placeObjectControllerList[i].gridPos.x == gridPos.x) && (this.placeObjectControllerList[i].gridPos.y == gridPos.y)){
+                        let temp = this.placeObjectControllerList[i];
+                        this.placeObjectControllerList.splice(i, 1);
+                        this.grid.RefreeArea(temp.gridPos.x, temp.gridPos.y, temp.data.gridSize.x, temp.data.gridSize.y);
+                        temp.isDestroy = true;
+                        let x = temp.gridPos.x;
+                        let y = temp.gridPos.y;
+                        for (let i = 1; i < 5; i++) {
+                            let u = x + this.dx[i];
+                            let v = y + this.dy[i];
+                            if (this.grid.getGridController(u, v) == null || this.grid.getGridController(u, v).isDestroy){
+                                continue;
+                            }
+                            this.grid.getGridController(u, v)?.buildNeighbour();
+                            this.grid.getGridController(u, v)?.checkType();
+                            this.grid.getGridController(u, v)?.freshState();
+                        }
+                        temp.grid = null;
+                        temp.node.destroy();
+                        break;
+                    }
+                }
+            }
+        }else if (this.currentPlacenum > 0) {
             // console.log(this.placeObjectControllerList.length);
             // for (let i = 0; i < this.placeObjectControllerList.length; i++) {
             //     console.log(this.placeObjectControllerList[i]);
             // }
             this.currentPlacenum = 0;
         }
+    }
+
+    ridEverything(){
+        let tot = this.placeObjectControllerList.length;
+        for (let i = 0; i < tot; i++){
+            this.undoCreatePlaceObject();
+        }
+    }
+
+    eraseButton(){
+        this.opType = 1;
     }
 
     protected onDestroy(): void {

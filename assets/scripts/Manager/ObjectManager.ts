@@ -28,9 +28,13 @@ export class ObjectManager extends Component {
         let Buld = instantiate(this.BuldPrefab);
         let SwitchPrefab = instantiate(this.SwitchPrefab);
         straightWire.setParent(this.ObjectListParent);
+        straightWire.setScale(1.2, 1.2, 1.2);
         Battery.setParent(this.ObjectListParent);
+        Battery.setScale(1.2, 1.2, 1.2);
         Buld.setParent(this.ObjectListParent);
+        Buld.setScale(1.2, 1.2, 1.2);
         SwitchPrefab.setParent(this.ObjectListParent);
+        SwitchPrefab.setScale(1.2, 1.2, 1.2);
     }
     
 

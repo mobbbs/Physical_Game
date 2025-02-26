@@ -19,6 +19,8 @@ export class ObjectController extends Component {
 
     canCross: boolean = true;
 
+    canBeFinalNode : boolean = false;
+
     sp: Sprite = null;
 
     gridPos: Vec2;
@@ -91,7 +93,7 @@ export class ObjectController extends Component {
         this.button.node.off(Button.EventType.CLICK, this.callback, this);
     }
     onSomething() {
-
+        this.button.enabled = false;
     }
 
     callback() {

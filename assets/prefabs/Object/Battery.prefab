@@ -340,6 +340,8 @@
     "data": {
       "__id__": 16
     },
+    "Type": 0,
+    "beNode": false,
     "_id": ""
   },
   {
@@ -353,9 +355,10 @@
       "x": 1,
       "y": 1
     },
-    "name": "Battery",
+    "name": "battery",
     "id": 1,
     "canMask": 0,
+    "resistance": 0,
     "prefab": {
       "__uuid__": "487a468b-841f-4d18-9f18-3bc3a49bdf6c",
       "__expectedType__": "cc.Prefab"

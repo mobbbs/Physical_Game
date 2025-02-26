@@ -20,7 +20,7 @@ export class SwitchController extends ObjectController {
         super.onLoad();
         this.beNode = false;
         this.canCross = false;
-        this.equleWire = true;
+        this.equleWire = false;
     }
     
     override setEle(type: number): void {
@@ -34,19 +34,18 @@ export class SwitchController extends ObjectController {
     
     freshCircuit(){
         this.curType = !this.curType;
-        
         this.equleWire = !this.equleWire;
         this.beNode = !this.beNode;
         this.sp.spriteFrame = this.sps[Number(this.curType)];
         this.canCross = this.curType;
         if (this.batteryBelong && !this.batteryBelong.isDestroy){
             this.batteryBelong.checkType();
-            // console.log("SB");
         }
     }
 
     override onSomething(): void {
         super.onSomething();
+        this.button.enabled = true;
         this.button.node.on(Button.EventType.CLICK, this.freshCircuit, this);
     }
     protected override onDisable(): void {
