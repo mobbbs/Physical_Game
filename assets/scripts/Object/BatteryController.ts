@@ -60,13 +60,7 @@ export class BatteryController extends ObjectController {
         this.rotationType = this.BatteryState[curType][1];
         if (this.leftController && this.rightController) {
             this.CanbuildGraph = true;
-<<<<<<< Updated upstream
-        } else if (this.upController && this.rightController) {
-            this.CanbuildGraph = true;
-        }
-=======
         } 
->>>>>>> Stashed changes
         if (this.CanbuildGraph) {
             this.circuit.setBattery(this);
             this.circuit.buildGraph();
